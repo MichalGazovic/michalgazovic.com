@@ -1,0 +1,297 @@
+/* =========================================
+   GLOBAL RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================================
+   PAGE BASE
+========================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #0d0e0d;
+    color: #eee;
+    font-family: 'Inter', sans-serif;
+    padding-left: 7vw;
+    padding-right: 7vw;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   TOP NAVIGATION
+========================================= */
+
+.top-nav {
+    display: flex;
+    gap: 22px;
+    padding-top: 40px;
+    padding-bottom: 42px;
+}
+
+.top-nav a {
+    color: #777;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    transition: color 0.25s ease;
+}
+
+.top-nav a:hover {
+    color: #ddd;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    padding-top: 14vh;
+    padding-bottom: 22vh;
+    max-width: 520px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #fff;
+}
+
+.hero p {
+    font-size: 15px;
+    color: #888;
+    font-weight: 300;
+}
+
+/* =========================================
+   GALLERY (Curated)
+========================================= */
+
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 22vh;
+    margin-bottom: 18vh;
+    align-items: center;
+    width: 100%;
+}
+
+.gallery-item {
+    display: block;
+    width: 100%;
+    will-change: transform, opacity;
+}
+
+.gallery-item img {
+    display: block;
+    width: 100%;
+    opacity: 0.96;
+    cursor: zoom-in;
+    transition: opacity 0.4s ease, transform 0.8s cubic-bezier(.19,1,.22,1);
+}
+
+.gallery-item img:hover {
+    opacity: 1;
+    transform: scale(1.015);
+}
+
+/* Šírky pre hlavnú galériu */
+.standard { width: 82%; max-width: 900px; }
+.featured { width: 88%; max-width: 1100px; }
+.vertical { width: 58%; max-width: 620px; }
+
+/* =========================================
+   TRANSITION / SPACING
+========================================= */
+
+.transition {
+    height: 14vh;
+}
+
+/* =========================================
+   CONTACT SHEET (Zúžený stredový layout)
+========================================= */
+
+.index-section {
+    padding-top: 60px;
+    border-top: 1px solid #1c1d1c;
+    margin-bottom: 24vh;
+    
+    /* TOTO ZMENŠÍ CELÚ SEKCIU A VYCENTRUJE JU */
+    max-width: 800px;      /* Maximálna šírka celého bloku, aby fotky neboli obrovské */
+    margin-left: auto;     /* Vycentrovanie na stred stránky */
+    margin-right: auto;    /* Vycentrovanie na stred stránky */
+}
+
+.index-section h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 24px;
+}
+
+.masonry-grid {
+    column-count: 3;       /* Návrat k pôvodným 3 stĺpcom */
+    column-gap: 28px;      /* Pekná vzdušná medzera medzi stĺpcami */
+    margin-top: 40px;
+}
+
+.archive-item {
+    display: block;
+    break-inside: avoid;
+    margin-bottom: 32px;
+    will-change: transform, opacity;
+}
+
+.archive-item img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    cursor: zoom-in;
+    opacity: 0.84;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.archive-item img:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* =========================================
+   ORGANIC ASYMMETRY (Pre zúžené 3 stĺpce)
+========================================= */
+
+/* Vertikálne posuny stĺpcov voči sebe */
+.archive-item:nth-child(3n+2) { margin-top: 40px; }
+.archive-item:nth-child(3n+3) { margin-top: 75px; }
+
+/* Jemné horizontálne rozvlnenie, aby bočné steny neboli ako podla pravítka */
+.archive-item:nth-child(3n+1) {
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.archive-item:nth-child(3n+2) {
+    width: 96%;
+    margin-left: 0;
+    margin-right: auto;
+}
+.archive-item:nth-child(3n+3) {
+    width: 95%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* =========================================
+   TEXT SECTIONS
+========================================= */
+
+.text-section {
+    padding-top: 50px;
+    border-top: 1px solid #1c1d1c;
+    max-width: 480px;
+    margin-bottom: 14vh;
+}
+
+.text-section h2 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.text-section p {
+    font-size: 15px;
+    color: #999;
+    font-weight: 300;
+}
+
+/* =========================================
+   LIGHTBOX
+========================================= */
+
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 9, 8, 0.97);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: zoom-out;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+#lightbox.active {
+    opacity: 1;
+}
+
+#lightbox-image {
+    max-width: 94vw;
+    max-height: 94vh;
+    object-fit: contain;
+    border-radius: 2px;
+    transition: opacity 0.2s ease, transform 0.4s ease;
+    transform: scale(0.985);
+    opacity: 1;
+}
+
+#lightbox.active #lightbox-image {
+    transform: scale(1);
+}
+
+/* =========================================
+   SCROLL FADE-IN (Z hmly)
+========================================= */
+
+.fade-element {
+    opacity: 0;
+    filter: blur(4px);
+    transition: opacity 1.2s ease, filter 1.2s ease;
+}
+
+.fade-element.visible {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* =========================================
+   RESPONSIVENESS
+========================================= */
+
+@media (max-width: 900px) {
+    .masonry-grid { column-count: 2; }
+    .hero h1 { font-size: 40px; }
+    .vertical { width: 72%; }
+    .archive-item:nth-child(3n+2), .archive-item:nth-child(3n+3) { margin-top: 0; }
+}
+
+@media (max-width: 600px) {
+    body { padding-left: 18px; padding-right: 18px; }
+    .top-nav { gap: 16px; }
+    .hero { padding-top: 8vh; padding-bottom: 12vh; }
+    .hero h1 { font-size: 32px; }
+    .gallery { gap: 12vh; }
+    .standard, .featured, .vertical { width: 100%; max-width: 100%; }
+    .masonry-grid { column-count: 1; }
+    .archive-item:nth-child(3n+2), .archive-item:nth-child(3n+3) { margin-top: 0; }
+}
