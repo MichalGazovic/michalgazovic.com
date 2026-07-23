@@ -34,70 +34,76 @@ const galleryPhotos = [
 ];
 
 // =========================================
-// INDEX / ARCHIVE IMAGES (With full resolution lightbox links)
+// INDEX / ARCHIVE IMAGES
 // =========================================
 const archivePhotos = [
-    { src: "images/thumbs/brooks-range-tonal-valley.webp", full: "images/brooks-range-tonal-valley.webp", alt: "Brooks range valley tonal study" },
-    { src: "images/thumbs/fire.webp", full: "images/fire.webp", alt: "Fire detail, charring logs" },
-    { src: "images/thumbs/blesky-vidly.webp", full: "images/blesky-vidly.webp", alt: "Lightning above Belinakse Tatry" },
-    { src: "images/thumbs/breza-gerlach-bw.webp", full: "images/breza-gerlach-bw.webp", alt: "BW birch tree with mountains in fog" },
-    { src: "images/thumbs/above-bergen.webp", full: "images/above-bergen.webp", alt: "Autumn tundra above Bergen" },
-    { src: "images/thumbs/bucegi.webp", full: "images/bucegi.webp", alt: "Bucegi mountain valley" },
-    { src: "images/thumbs/aurora-umealven.webp", full: "images/aurora-umealven.webp", alt: "Aurora borealis above bridge in Umea " },
-    { src: "images/thumbs/lock-old-wood.webp", full: "images/lock-old-wood.webp", alt: "Old lock on old wood" },
-    { src: "images/thumbs/nancy-lake-evening-reflexion.webp", full: "images/nancy-lake-evening-reflexion.webp", alt: "Nancy lake sunset" },
-    { src: "images/thumbs/morning-denali-ridge.webp", full: "images/morning-denali-ridge.webp", alt: "Mt Denali morning study" },
-    { src: "images/thumbs/luka-zdiar.webp", full: "images/luka-zdiar.webp", alt: "Green meadow after a thunderstorm" },
-    { src: "images/thumbs/snow-firewood.webp", full: "images/snow-firewood.webp", alt: "Winter rustic firewood shed" },
-    { src: "images/thumbs/road-to-sunshine.webp", full: "images/road-to-sunshine.webp", alt: "Road leading into fog" },
-    { src: "images/thumbs/Richardson-highway.webp", full: "images/Richardson-highway.webp", alt: "Richardswon highway" },
-    { src: "images/thumbs/siroke-sedlo-morning.webp", full: "images/siroke-sedlo-morning.webp", alt: "View at Zdiar and Zamagurie from Siroke sedlo" },
-    { src: "images/thumbs/rain-in-brooks-range.webp", full: "images/rain-in-brooks-range.webp", alt: "Rain in Brooks Range" },
-    { src: "images/thumbs/russian-lake-fog-submerged-logs.webp", full: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake" },
-    { src: "images/thumbs/corner-joint-study.webp", full: "images/corner-joint-study.webp", alt: "Log house corner joint" },
-    { src: "images/thumbs/morning-valley-from-mala-studena.webp", full: "images/morning-valley-from-mala-studena.webp", alt: "Foggy moring from the mountain valley" },
-    { src: "images/thumbs/poppy-field.webp", full: "images/poppy-field.webp", alt: "Poppy field" },
-    { src: "images/thumbs/moon-in-siroke-sedlo.webp", full: "images/moon-in-siroke-sedlo.webp", alt: "Moon in Siroke sedlo" },
-    { src: "images/thumbs/loghouse-tree-fog.webp", full: "images/loghouse-tree-fog.webp", alt: "Loghouse in foggy sunrise" },
-    { src: "images/thumbs/vindelnalven-sunset.webp", full: "images/vindelnalven-sunset.webp", alt: "Sunset at the banks of Vindelnalven" },
-    { src: "images/thumbs/wind-tree-study.webp", full: "images/wind-tree-study.webp", alt: "Wind tree minimalist study" },
-    { src: "images/thumbs/kino-wood-pile.webp", full: "images/kino-wood-pile.webp", alt: "Old kino builing in Zdiar" },
-    { src: "images/thumbs/matanuska-glacier-valley.webp", full: "images/matanuska-glacier-valley.webp", alt: "Matansuka glacier and massive peaks" },
-    { src: "images/thumbs/hay-harvest-landscape-bw.webp", full: "images/hay-harvest-landscape-bw.webp", alt: "MOuntain landscape after hay harwest" },
-    { src: "images/thumbs/vidly-a-tokaren.webp", full: "images/vidly-a-tokaren.webp", alt: "Zdiarska vidla and Havran autumn" },
-    { src: "images/thumbs/zadne-medodoly.webp", full: "images/zadne-medodoly.webp", alt: "Zadne medodoly valley" },
-    { src: "images/thumbs/woloszyn-koszista.webp", full: "images/woloszyn-koszista.webp", alt: "Woloszyn and Koszysta" },
-    { src: "images/thumbs/vertical-landscape-water.webp", full: "images/vertical-landscape-water.webp", alt: "Mala studena valley in rain" },
-    { src: "images/thumbs/willow-tree-fog.webp", full: "images/willow-tree-fog.webp", alt: "Willow tree in foggy sunrise" },
-    { src: "images/thumbs/vychod-slnka.webp", full: "images/vychod-slnka.webp", alt: "Sunrise in Belianske Tatry" },
-    { src: "images/thumbs/ust-pojeg-peatland.webp", full: "images/ust-pojeg-peatland.webp", alt: "Early morning at the boreal peatland" },
-    { src: "images/thumbs/tatry-frost-birch.webp", full: "images/tatry-frost-birch.webp", alt: "Frosty birches and monutains" },
-    { src: "images/thumbs/stojany-na-seno.webp", full: "images/stojany-na-seno.webp", alt: "Hay racks with little birds" },
-    { src: "images/thumbs/sunlight-stored.webp", full: "images/sunlight-stored.webp", alt: "Wood study firewood and planks" },
-    { src: "images/thumbs/alaska-snow-dust-mountains.webp", full: "images/alaska-snow-dust-mountains.webp", alt: "Alaska snow mountains" },
-    { src: "images/thumbs/sunrise-tree-silhouets.webp", full: "images/sunrise-tree-silhouets.webp", alt: "Sunrise tree silhouetes" },
-    { src: "images/thumbs/snow-tree-study.webp", full: "images/snow-tree-study.webp", alt: "Zadne Medodoly snow tree study" },
-    { src: "images/thumbs/russian-lake-fog-trees.webp", full: "images/russian-lake-fog-trees.webp", alt: "Russian lake tree glow" },
-    { src: "images/thumbs/rainbow-brooks-range.webp", full: "images/rainbow-brooks-range.webp", alt: "Rainbow in Brooks Range" },
-    { src: "images/thumbs/primeval-forest-log.webp", full: "images/primeval-forest-log.webp", alt: "Spring in primeval forest" },
-    { src: "images/thumbs/polychrome-mountain.webp", full: "images/polychrome-mountain.webp", alt: "Polychrome mountain" },
-    { src: "images/thumbs/mesiac-dole-kopec.webp", full: "images/mesiac-dole-kopec.webp", alt: "Moon above monutain ridge" },
-    { src: "images/thumbs/mt-denali-with-tundra.webp", full: "images/mt-denali-with-tundra.webp", alt: "Mt Denali with tundra forest" },
-    { src: "images/thumbs/meadows-with-hay-racks.webp", full: "images/meadows-with-hay-racks.webp", alt: "Meadows with hay racks" },
-    { src: "images/thumbs/loghouse-settlement.webp", full: "images/loghouse-settlement.webp", alt: "Loghouse settlement" },
-    { src: "images/thumbs/log-house-fence-morning.webp", full: "images/log-house-fence-morning.webp", alt: "Fenced loghouse in fog" },
-    { src: "images/thumbs/havran-autumn.webp", full: "images/havran-autumn.webp", alt: "Havran autumn" },
-    { src: "images/thumbs/glacier-ice-study.webp", full: "images/glacier-ice-study.webp", alt: "Glacier ice study" },
-    { src: "images/thumbs/foggy-peatland-sweden.webp", full: "images/foggy-peatland-sweden.webp", alt: "Degero Stormyr peatland in fog" },
-    { src: "images/thumbs/frost-reeds.webp", full: "images/frost-reeds.webp", alt: "Frosty reeds" },
-    { src: "images/thumbs/belianky-noc-dedina.webp", full: "images/belianky-noc-dedina.webp", alt: "Zdiar at night" },
-    { src: "images/thumbs/foggy-moon-hill.webp", full: "images/foggy-moon-hill.webp", alt: "Foggy moon above hill" },
-    { src: "images/thumbs/caribou-herd-silhouete.webp", full: "images/caribou-herd-silhouete.webp", alt: "Caribou herd on a ridge" },
-    { src: "images/thumbs/belianky-blue-gold.webp", full: "images/belianky-blue-gold.webp", alt: "Belianske tatry blue hour" },
-    { src: "images/thumbs/beech-tree-in-fog.webp", full: "images/beech-tree-in-fog.webp", alt: "Beech tree in fog" },
-    { src: "images/thumbs/beech-fir-fog-tokaren.webp", full: "images/beech-fir-fog-tokaren.webp", alt: "Beech-fir forest in clouds" },
-    { src: "images/thumbs/eldena-forest.webp", full: "images/eldena-forest.webp", alt: "Eldena forest spring flooding" }
+    { src: "images/brooks-range-tonal-valley.webp", alt: "Brooks range valley tonal study" },
+    { src: "images/fire.webp", alt: "Fire detail, charring logs" },
+    { src: "images/blesky-vidly.webp", alt: "Lightning above Belinakse Tatry" },
+    { src: "images/breza-gerlach-bw.webp", alt: "BW birch tree with mountains in fog" },
+    { src: "images/above-bergen.webp", alt: "Autumn tundra above Bergen" },
+    { src: "images/bucegi.webp", alt: "Bucegi mountain valley" },
+    { src: "images/aurora-umealven.webp", alt: "Aurora borealis above bridge in Umea " },
+    { src: "images/lock-old-wood.webp", alt: "Old lock on old wood" },
+    { src: "images/nancy-lake-evening-reflexion.webp", alt: "Nancy lake sunset" },
+    { src: "images/morning-denali-ridge.webp", alt: "Mt Denali morning study" },
+    { src: "images/luka-zdiar.webp", alt: "Green meadow after a thunderstorm" },
+    { src: "images/snow-firewood.webp", alt: "Winter rustic firewood shed" },
+    { src: "images/road-to-sunshine.webp", alt: "Road leading into fog" },
+    { src: "images/Richardson-highway.webp", alt: "Richardswon highway" },
+    { src: "images/siroke-sedlo-morning.webp", alt: "View at Zdiar and Zamagurie from Siroke sedlo" },
+    { src: "images/rain-in-brooks-range.webp", alt: "Rain in Brooks Range" },
+    { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake" },
+    { src: "images/corner-joint-study.webp", alt: "Log house corner joint" },
+    { src: "images/morning-valley-from-mala-studena.webp", alt: "Foggy moring from the mountain valley" },
+    { src: "images/poppy-field.webp", alt: "Poppy field" },
+    { src: "images/moon-in-siroke-sedlo.webp", alt: "Moon in Siroke sedlo" },
+    { src: "images/loghouse-tree-fog.webp", alt: "Loghouse in foggy sunrise" },
+    { src: "images/vindelnalven-sunset.webp", alt: "Sunset at the banks of Vindelnalven" },
+    { src: "images/wind-tree-study.webp", alt: "Wind tree minimalist study" },
+    { src: "images/kino-wood-pile.webp", alt: "Old kino builing in Zdiar" },
+    { src: "images/matanuska-glacier-valley.webp", alt: "Matansuka glacier and massive peaks" },
+    { src: "images/hay-harvest-landscape-bw.webp", alt: "MOuntain landscape after hay harwest" },
+    { src: "images/vidly-a-tokaren.webp", alt: "Zdiarska vidla and Havran autumn" },
+    { src: "images/zadne-medodoly.webp", alt: "Zadne medodoly valley" },
+    { src: "images/woloszyn-koszista.webp", alt: "Woloszyn and Koszysta" },
+    { src: "images/vertical-landscape-water.webp", alt: "Mala studena valley in rain" },
+    { src: "images/willow-tree-fog.webp", alt: "Willow tree in foggy sunrise" },
+    { src: "images/vychod-slnka.webp", alt: "Sunrise in Belianske Tatry" },
+    { src: "images/ust-pojeg-peatland.webp", alt: "Early morning at the boreal peatland" },
+    { src: "images/tatry-frost-birch.webp", alt: "Frosty birches and monutains" },
+    { src: "images/stojany-na-seno.webp", alt: "Hay racks with little birds" },
+    { src: "images/sunlight-stored.webp", alt: "Wood study firewood and planks" },
+    { src: "images/alaska-snow-dust-mountains.webp", alt: "Alaska snow mountains" },
+    { src: "images/sunrise-tree-silhouets.webp", alt: "Sunrise tree silhouetes" },
+    { src: "images/snow-tree-study.webp", alt: "Zadne Medodoly snow tree study" },
+    { src: "images/russian-lake-fog-trees.webp", alt: "Russian lake tree glow" },
+    { src: "images/rainbow-brooks-range.webp", alt: "Rainbow in Brooks Range" },
+    { src: "images/primeval-forest-log.webp", alt: "Spring in primeval forest" },
+    { src: "images/polychrome-mountain.webp", alt: "Polychrome mountain" },
+    { src: "images/mesiac-dole-kopec.webp", alt: "Moon above monutain ridge" },
+    { src: "images/mt-denali-with-tundra.webp", alt: "Mt Denali with tundra forest" },
+    { src: "images/meadows-with-hay-racks.webp", alt: "Meadows with hay racks" },
+    { src: "images/loghouse-settlement.webp", alt: "Loghouse settlement" },
+    { src: "images/log-house-fence-morning.webp", alt: "Fenced loghouse in fog" },
+    { src: "images/havran-autumn.webp", alt: "Havran autumn" },
+    { src: "images/glacier-ice-study.webp", alt: "Glacier ice study" },
+    { src: "images/foggy-peatland_sweden.webp", alt: "Degero Stormyr peatland in fog" },
+    { src: "images/frost-reeds.webp", alt: "Frosty reeds" },
+    { src: "images/belianky-noc_dedina.webp", alt: "Zdiar at night" },
+    { src: "images/foggy-moon-hill.webp", alt: "Foggy moon above hill" },
+    { src: "images/caribou-herd-silhouete.webp", alt: "Caribou herd on a ridge" },
+    { src: "images/belianky-blue-gold.webp", alt: "Belianske tatry blue hour" },
+    { src: "images/beech-tree-in-fog.webp", alt: "Beech tree in fog" },
+    { src: "images/beech-fir-fog-tokaren.webp", alt: "Beech-fir forest in clouds" },
+    { src: "images/eldena-forest.webp", alt: "Eldena forest spring flooding" }
 ];
+
+// Helper function to resolve thumb paths dynamically
+function getThumbSrc(fullSrc) {
+    const filename = fullSrc.split('/').pop();
+    return `thumbs/${filename}`;
+}
 
 (function() {
     const gallery = document.querySelector("#gallery-section") || document.querySelector(".gallery");
@@ -105,48 +111,50 @@ const archivePhotos = [
 
     // 1. Render Main Gallery
     if (gallery) {
-        gallery.innerHTML = ""; 
+        gallery.innerHTML = "";
+        const fragment = document.createDocumentFragment();
+        
         galleryPhotos.forEach((photo, index) => {
             const wrapper = document.createElement("div");
             wrapper.className = `gallery-item ${photo.layout || 'standard'} fade-element`;
 
             const img = document.createElement("img");
+            // Load original image for main gallery, or thumbnail fallback
             img.src = photo.src;
-            img.dataset.full = photo.full || photo.src; 
+            img.dataset.fullsrc = photo.src;
             img.alt = photo.alt;
-            img.loading = index < 2 ? "eager" : "lazy"; 
+            img.decoding = "async";
+            // First 2 images render eagerly for fast LCP score
+            img.loading = index < 2 ? "eager" : "lazy";
 
             wrapper.appendChild(img);
-            gallery.appendChild(wrapper);
+            fragment.appendChild(wrapper);
         });
+        gallery.appendChild(fragment);
     }
 
-    // 2. Render Contact Sheet
-if (masonryGrid) {
-    masonryGrid.innerHTML = ""; 
-    archivePhotos.forEach((photo) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "archive-item fade-element";
+    // 2. Render Archive/Contact Sheet using THUMBNAILS
+    if (masonryGrid) {
+        masonryGrid.innerHTML = "";
+        const fragment = document.createDocumentFragment();
 
-        const img = document.createElement("img");
-        
-        img.onerror = function() {
-            this.onerror = null;
-            this.src = photo.full;
-        };
+        archivePhotos.forEach((photo) => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "archive-item fade-element";
 
-        img.src = photo.src;
-        img.dataset.full = photo.full || photo.src; 
-        img.alt = photo.alt;
-        img.decoding = "async";
-        
-        // LAZY LOAD EVERYTHING IN ARCHIVE GRID
-        img.loading = "lazy"; 
+            const img = document.createElement("img");
+            // Point thumbnail grid directly to thumbs folder
+            img.src = getThumbSrc(photo.src);
+            img.dataset.fullsrc = photo.src; 
+            img.alt = photo.alt;
+            img.decoding = "async";
+            img.loading = "lazy";
 
-        wrapper.appendChild(img);
-        masonryGrid.appendChild(wrapper);
-    });
-}
+            wrapper.appendChild(img);
+            fragment.appendChild(wrapper);
+        });
+        masonryGrid.appendChild(fragment);
+    }
 
     // 3. Lightbox Logic
     const lightbox = document.getElementById("lightbox");
@@ -163,7 +171,9 @@ if (masonryGrid) {
                 currentPhotosGroup = images;
                 currentIndex = images.indexOf(e.target);
                 
-                lightboxImage.src = e.target.dataset.full || e.target.src;
+                // Fetch full resolution image stored in data-fullsrc
+                const targetFullSrc = e.target.dataset.fullsrc || e.target.src;
+                lightboxImage.src = targetFullSrc;
                 lightbox.style.display = "flex";
                 document.body.style.overflow = "hidden";
 
@@ -190,8 +200,8 @@ if (masonryGrid) {
         if (!lightboxImage || currentPhotosGroup.length === 0) return;
         lightboxImage.style.opacity = "0";
         setTimeout(() => {
-            const target = currentPhotosGroup[index];
-            lightboxImage.src = target.dataset.full || target.src;
+            const targetFullSrc = currentPhotosGroup[index].dataset.fullsrc || currentPhotosGroup[index].src;
+            lightboxImage.src = targetFullSrc;
             lightboxImage.onload = () => { lightboxImage.style.opacity = "1"; };
         }, 150);
     }
@@ -207,30 +217,28 @@ if (masonryGrid) {
         if (lightbox && lightbox.style.display === "flex") {
             if (event.key === "Escape") closeLightbox();
             if (event.key === "ArrowRight") {
-                currentIndex = (currentIndex + 1) >= currentPhotosGroup.length ? 0 : currentIndex + 1;
+                currentIndex = (currentIndex + 1) % currentPhotosGroup.length;
                 updateLightboxImage(currentIndex);
             }
             if (event.key === "ArrowLeft") {
-                currentIndex = (currentIndex - 1) < 0 ? currentPhotosGroup.length - 1 : currentIndex - 1;
+                currentIndex = (currentIndex - 1 + currentPhotosGroup.length) % currentPhotosGroup.length;
                 updateLightboxImage(currentIndex);
             }
         }
     });
 
-    // 4. Intersection Observer (Runs immediately without delay)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-        }
+    // 4. Performance-optimized Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { 
+        rootMargin: "100px 0px", // Trigger slightly before scrolling into view
+        threshold: 0.01 
     });
-}, { 
-    threshold: 0.01,
-    rootMargin: "200px 0px" // Starts fading in 200px BEFORE the user scrolls to it
-});
 
-// Observe right after items are appended
-document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
-
+    document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
 })();
