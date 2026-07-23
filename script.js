@@ -217,18 +217,20 @@ if (masonryGrid) {
         }
     });
 
-    // 4. Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.05 });
+    // 4. Intersection Observer (Runs immediately without delay)
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        }
+    });
+}, { 
+    threshold: 0.01,
+    rootMargin: "200px 0px" // Starts fading in 200px BEFORE the user scrolls to it
+});
 
-    setTimeout(() => {
-        document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
-    }, 100);
+// Observe right after items are appended
+document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
 
 })();
