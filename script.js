@@ -239,18 +239,20 @@ const archivePhotos = [
     // 1. Vykreslenie hlavnej galérie
     if (gallery) {
         gallery.innerHTML = ""; // Vyčistíme staré alt texty
-        galleryPhotos.forEach((photo) => {
-            const wrapper = document.createElement("div");
-            wrapper.className = `gallery-item ${photo.layout || 'standard'} fade-element`;
+        galleryPhotos.forEach((photo, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = `gallery-item ${photo.layout || 'standard'} fade-element`;
 
-            const img = document.createElement("img");
-            img.src = photo.src;
-            img.alt = photo.alt;
-            img.loading = "lazy";
+    const img = document.createElement("img");
+    img.src = photo.src;
+    img.alt = photo.alt;
+    
+    // Eager load top 2 images; lazy load the rest
+    img.loading = index < 2 ? "eager" : "lazy";
 
-            wrapper.appendChild(img);
-            gallery.appendChild(wrapper);
-        });
+    wrapper.appendChild(img);
+    gallery.appendChild(wrapper);
+});
     }
 
     // 2. Vykreslenie Contact Sheetu
