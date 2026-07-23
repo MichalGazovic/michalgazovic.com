@@ -275,23 +275,86 @@ body {
 }
 
 /* =========================================
-   RESPONSIVENESS
+   RESPONSIVENESS (FIXED FOR MOBILE)
 ========================================= */
 
+/* Tablets & Small Laptops */
 @media (max-width: 900px) {
-    .masonry-grid { column-count: 2; }
-    .hero h1 { font-size: 40px; }
-    .vertical { width: 72%; }
-    .archive-item:nth-child(3n+2), .archive-item:nth-child(3n+3) { margin-top: 0; }
+    /* Keep 3 columns on tablet screens, slightly narrow gaps */
+    .masonry-grid { 
+        column-count: 3; 
+        column-gap: 16px;
+    }
+    
+    .hero h1 { font-size: 38px; }
+    .gallery { gap: 14vh; }
+    
+    /* Give vertical images more breathing room */
+    .vertical { width: 80%; }
+    
+    /* Reset organic vertical offsets for smoother multi-column flow */
+    .archive-item:nth-child(3n+2), 
+    .archive-item:nth-child(3n+3) { 
+        margin-top: 15px; 
+    }
 }
 
+/* Mobile Phones */
 @media (max-width: 600px) {
-    body { padding-left: 18px; padding-right: 18px; }
-    .top-nav { gap: 16px; }
-    .hero { padding-top: 8vh; padding-bottom: 12vh; }
-    .hero h1 { font-size: 32px; }
-    .gallery { gap: 12vh; }
-    .standard, .featured, .vertical { width: 100%; max-width: 100%; }
-    .masonry-grid { column-count: 1; }
-    .archive-item:nth-child(3n+2), .archive-item:nth-child(3n+3) { margin-top: 0; }
+    body { 
+        padding-left: 20px; 
+        padding-right: 20px; 
+    }
+
+    .top-nav { 
+        gap: 14px; 
+        padding-top: 24px;
+        padding-bottom: 24px;
+        flex-wrap: wrap; /* Prevents navigation items from overflowing horizontal screen */
+    }
+
+    .hero { 
+        padding-top: 6vh; 
+        padding-bottom: 10vh; 
+    }
+    
+    .hero h1 { font-size: 30px; }
+
+    /* 1. MAIN GALLERY FIX: Make all photos (standard, featured, vertical) full width on mobile */
+    .gallery { gap: 10vh; }
+    .standard, .featured, .vertical { 
+        width: 100% !important; 
+        max-width: 100% !important; 
+    }
+
+    /* 2. MASONRY GRID FIX: Forced 3 columns (or 2 columns for tight viewports) */
+    .masonry-grid { 
+        column-count: 3; /* Displays 3 columns on mobile as requested */
+        column-gap: 8px; /* Tighter gaps so images have enough room to render clean */
+        margin-top: 20px;
+    }
+
+    /* Clear asymmetric width hacks so images fill their columns properly on mobile */
+    .archive-item {
+        margin-bottom: 12px;
+    }
+
+    .archive-item:nth-child(3n+1),
+    .archive-item:nth-child(3n+2),
+    .archive-item:nth-child(3n+3) { 
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 0 !important; 
+    }
+}
+
+/* Very Small Mobile Screens (Under 380px wide) */
+@media (max-width: 380px) {
+    /* 3 columns on tiny screens (<380px) makes thumbnails ~100px wide. 
+       If you feel 3 columns is too squished on tiny phones, drop to 2 columns here: */
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 8px;
+    }
 }
