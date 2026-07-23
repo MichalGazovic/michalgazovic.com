@@ -90,15 +90,15 @@ body {
 .gallery-item {
     display: block;
     width: 100%;
-    will-change: transform, opacity;
 }
 
 .gallery-item img {
     display: block;
     width: 100%;
+    height: auto;
     opacity: 0.96;
     cursor: zoom-in;
-    transition: opacity 0.4s ease, transform 0.8s cubic-bezier(.19,1,.22,1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .gallery-item img:hover {
@@ -106,7 +106,7 @@ body {
     transform: scale(1.015);
 }
 
-/* Desktop sizing for main gallery */
+/* Layout widths */
 .standard { width: 82%; max-width: 900px; }
 .featured { width: 88%; max-width: 1100px; }
 .vertical { width: 58%; max-width: 620px; }
@@ -120,16 +120,16 @@ body {
 }
 
 /* =========================================
-   CONTACT SHEET (Masonry Layout)
+   CONTACT SHEET
 ========================================= */
 
 .index-section {
     padding-top: 60px;
     border-top: 1px solid #1c1d1c;
     margin-bottom: 24vh;
-    max-width: 800px;      
-    margin-left: auto;     
-    margin-right: auto;    
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .index-section h2 {
@@ -142,8 +142,8 @@ body {
 }
 
 .masonry-grid {
-    column-count: 3;       
-    column-gap: 28px;      
+    column-count: 3;
+    column-gap: 28px;
     margin-top: 40px;
 }
 
@@ -151,11 +151,11 @@ body {
     display: block;
     break-inside: avoid;
     margin-bottom: 32px;
-    will-change: transform, opacity;
 }
 
 .archive-item img {
     width: 100%;
+    height: auto;
     display: block;
     border-radius: 2px;
     cursor: zoom-in;
@@ -168,25 +168,13 @@ body {
     transform: scale(1.02);
 }
 
-/* Organic Asymmetry for Desktop 3-Columns */
+/* Asymmetry settings */
 .archive-item:nth-child(3n+2) { margin-top: 40px; }
 .archive-item:nth-child(3n+3) { margin-top: 75px; }
 
-.archive-item:nth-child(3n+1) {
-    width: 94%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.archive-item:nth-child(3n+2) {
-    width: 96%;
-    margin-left: 0;
-    margin-right: auto;
-}
-.archive-item:nth-child(3n+3) {
-    width: 95%;
-    margin-left: auto;
-    margin-right: 0;
-}
+.archive-item:nth-child(3n+1) { width: 94%; margin-left: auto; margin-right: auto; }
+.archive-item:nth-child(3n+2) { width: 96%; margin-left: 0; margin-right: auto; }
+.archive-item:nth-child(3n+3) { width: 95%; margin-left: auto; margin-right: 0; }
 
 /* =========================================
    TEXT SECTIONS
@@ -243,7 +231,7 @@ body {
     max-height: 94vh;
     object-fit: contain;
     border-radius: 2px;
-    transition: opacity 0.2s ease, transform 0.4s ease;
+    transition: opacity 0.2s ease, transform 0.3s ease;
     transform: scale(0.985);
     opacity: 1;
 }
@@ -253,16 +241,27 @@ body {
 }
 
 /* =========================================
-   SCROLL FADE-IN (Optimized Performance)
+   LIGHTWEIGHT SCROLL FADE-IN
 ========================================= */
 
 .fade-element {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transform: translateY(12px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fade-element.visible {
     opacity: 1;
+    transform: translateY(0);
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .fade-element {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }
 
 /* =========================================
@@ -274,11 +273,15 @@ body {
         column-count: 3; 
         column-gap: 16px;
     }
+    
     .hero h1 { font-size: 38px; }
     .gallery { gap: 14vh; }
     .vertical { width: 80%; }
+    
     .archive-item:nth-child(3n+2), 
-    .archive-item:nth-child(3n+3) { margin-top: 15px; }
+    .archive-item:nth-child(3n+3) { 
+        margin-top: 15px; 
+    }
 }
 
 @media (max-width: 600px) {
@@ -298,19 +301,18 @@ body {
         padding-top: 6vh; 
         padding-bottom: 10vh; 
     }
+    
     .hero h1 { font-size: 30px; }
 
-    /* Main gallery photos full width on mobile */
     .gallery { gap: 10vh; }
     .standard, .featured, .vertical { 
         width: 100% !important; 
         max-width: 100% !important; 
     }
 
-    /* Keep 3 columns on mobile with tighter gaps */
     .masonry-grid { 
-        column-count: 3; 
-        column-gap: 8px; 
+        column-count: 2; /* 2 columns works best for small mobile rendering */
+        column-gap: 10px;
         margin-top: 20px;
     }
 
@@ -325,12 +327,5 @@ body {
         margin-left: 0 !important;
         margin-right: 0 !important;
         margin-top: 0 !important; 
-    }
-}
-
-@media (max-width: 380px) {
-    .masonry-grid {
-        column-count: 2;
-        column-gap: 8px;
     }
 }
