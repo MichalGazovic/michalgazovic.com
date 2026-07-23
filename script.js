@@ -50,7 +50,7 @@ const archivePhotos = [
     { src: "images/luka-zdiar.webp", alt: "Green meadow after a thunderstorm" },
     { src: "images/snow-firewood.webp", alt: "Winter rustic firewood shed" },
     { src: "images/road-to-sunshine.webp", alt: "Road leading into fog" },
-    { src: "images/richardson-highway.webp", alt: "Richardswon highway" },
+    { src: "images/richardson-highway.webp", alt: "Richardson highway" },
     { src: "images/siroke-sedlo-morning.webp", alt: "View at Zdiar and Zamagurie from Siroke sedlo" },
     { src: "images/rain-in-brooks-range.webp", alt: "Rain in Brooks Range" },
     { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake" },
