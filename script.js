@@ -122,30 +122,31 @@ const archivePhotos = [
     }
 
     // 2. Render Contact Sheet
-    if (masonryGrid) {
-        masonryGrid.innerHTML = ""; 
-        archivePhotos.forEach((photo, index) => {
-            const wrapper = document.createElement("div");
-            wrapper.className = "archive-item fade-element";
+if (masonryGrid) {
+    masonryGrid.innerHTML = ""; 
+    archivePhotos.forEach((photo) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "archive-item fade-element";
 
-            const img = document.createElement("img");
-            
-            // Attach fallback handler in case 'thumbs/' directory doesn't exist yet
-            img.onerror = function() {
-                this.onerror = null;
-                this.src = photo.full;
-            };
+        const img = document.createElement("img");
+        
+        img.onerror = function() {
+            this.onerror = null;
+            this.src = photo.full;
+        };
 
-            img.src = photo.src;
-            img.dataset.full = photo.full || photo.src; 
-            img.alt = photo.alt;
-            img.decoding = "async";
-            img.loading = index < 3 ? "eager" : "lazy";
+        img.src = photo.src;
+        img.dataset.full = photo.full || photo.src; 
+        img.alt = photo.alt;
+        img.decoding = "async";
+        
+        // LAZY LOAD EVERYTHING IN ARCHIVE GRID
+        img.loading = "lazy"; 
 
-            wrapper.appendChild(img);
-            masonryGrid.appendChild(wrapper);
-        });
-    }
+        wrapper.appendChild(img);
+        masonryGrid.appendChild(wrapper);
+    });
+}
 
     // 3. Lightbox Logic
     const lightbox = document.getElementById("lightbox");
