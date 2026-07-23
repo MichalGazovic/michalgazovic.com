@@ -102,7 +102,7 @@ const archivePhotos = [
 // Helper function to resolve thumb paths dynamically
 function getThumbSrc(fullSrc) {
     const filename = fullSrc.split('/').pop();
-    return `thumbs/${filename}`;
+    return `images/thumbs/${filename}`;
 }
 
 (function() {
