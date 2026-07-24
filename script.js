@@ -50,7 +50,7 @@ const archivePhotos = [
     { src: "images/luka-zdiar.webp", alt: "Green meadow after a thunderstorm" },
     { src: "images/snow-firewood.webp", alt: "Winter rustic firewood shed" },
     { src: "images/road-to-sunshine.webp", alt: "Road leading into fog" },
-    { src: "images/richardson-highway.webp", alt: "Richardson highway" },
+    { src: "images/Richardson-highway.webp", alt: "Richardswon highway" },
     { src: "images/siroke-sedlo-morning.webp", alt: "View at Zdiar and Zamagurie from Siroke sedlo" },
     { src: "images/rain-in-brooks-range.webp", alt: "Rain in Brooks Range" },
     { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake" },
@@ -99,7 +99,7 @@ const archivePhotos = [
     { src: "images/eldena-forest.webp", alt: "Eldena forest spring flooding" }
 ];
 
-// Helper function to resolve thumb paths dynamically
+// Helper funkcia pre odvodenie cesty k náhľadu
 function getThumbSrc(fullSrc) {
     const filename = fullSrc.split('/').pop();
     return `images/thumbs/${filename}`;
@@ -108,6 +108,9 @@ function getThumbSrc(fullSrc) {
 (function() {
     const gallery = document.querySelector("#gallery-section") || document.querySelector(".gallery");
     const masonryGrid = document.querySelector("#masonry-grid") || document.querySelector(".masonry-grid");
+
+    // Zistíme šírku obrazovky pre adaptívne načítanie
+    const isMobile = window.innerWidth <= 768;
 
     // 1. Render Main Gallery
     if (gallery) {
@@ -119,13 +122,19 @@ function getThumbSrc(fullSrc) {
             wrapper.className = `gallery-item ${photo.layout || 'standard'} fade-element`;
 
             const img = document.createElement("img");
-            // Load original image for main gallery, or thumbnail fallback
-            img.src = photo.src;
-            img.dataset.fullsrc = photo.src;
             img.alt = photo.alt;
+            img.dataset.fullsrc = photo.src; // Pôvodný súbor pre Lightbox
             img.decoding = "async";
-            // First 2 images render eagerly for fast LCP score
-            img.loading = index < 2 ? "eager" : "lazy";
+
+            // Správne poradie pre Lazy-Loading
+            if (index < 1) {
+                img.loading = "eager"; // Len prvá fotka načítava okamžite
+            } else {
+                img.loading = "lazy";  // Ostatné sa sťahujú až pri scrollnutí
+            }
+
+            // Rozhodnutie: Desktop = Plná fotka, Mobile = Thumb
+            img.src = isMobile ? getThumbSrc(photo.src) : photo.src;
 
             wrapper.appendChild(img);
             fragment.appendChild(wrapper);
@@ -133,7 +142,7 @@ function getThumbSrc(fullSrc) {
         gallery.appendChild(fragment);
     }
 
-    // 2. Render Archive/Contact Sheet using THUMBNAILS
+    // 2. Render Archive/Contact Sheet (Vždy Thumbs)
     if (masonryGrid) {
         masonryGrid.innerHTML = "";
         const fragment = document.createDocumentFragment();
@@ -143,12 +152,13 @@ function getThumbSrc(fullSrc) {
             wrapper.className = "archive-item fade-element";
 
             const img = document.createElement("img");
-            // Point thumbnail grid directly to thumbs folder
-            img.src = getThumbSrc(photo.src);
-            img.dataset.fullsrc = photo.src; 
             img.alt = photo.alt;
+            img.dataset.fullsrc = photo.src; 
             img.decoding = "async";
             img.loading = "lazy";
+
+            // Archív používa výhradne male thumbs
+            img.src = getThumbSrc(photo.src);
 
             wrapper.appendChild(img);
             fragment.appendChild(wrapper);
@@ -171,7 +181,7 @@ function getThumbSrc(fullSrc) {
                 currentPhotosGroup = images;
                 currentIndex = images.indexOf(e.target);
                 
-                // Fetch full resolution image stored in data-fullsrc
+                // Vždy stiahne plnú kvalitu uloženú v data-fullsrc
                 const targetFullSrc = e.target.dataset.fullsrc || e.target.src;
                 lightboxImage.src = targetFullSrc;
                 lightbox.style.display = "flex";
@@ -192,6 +202,7 @@ function getThumbSrc(fullSrc) {
         lightbox.classList.remove("active");
         setTimeout(() => {
             lightbox.style.display = "none";
+            if (lightboxImage) lightboxImage.src = ""; // Vyčistenie RAM po zatvorení
             document.body.style.overflow = "auto";
         }, 250);
     }
@@ -236,7 +247,7 @@ function getThumbSrc(fullSrc) {
             }
         });
     }, { 
-        rootMargin: "100px 0px", // Trigger slightly before scrolling into view
+        rootMargin: "200px 0px", // Načíta sa s malým predstihom pri skrolovaní
         threshold: 0.01 
     });
 
