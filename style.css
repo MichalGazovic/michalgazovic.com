@@ -1,5 +1,5 @@
 /* =========================================
-   GLOBAL RESET
+   GLOBAL RESET & PERFORMANCE HINTS
 ========================================= */
 
 * {
@@ -8,18 +8,16 @@
     box-sizing: border-box;
 }
 
-/* =========================================
-   PAGE BASE
-========================================= */
-
 html {
     scroll-behavior: smooth;
+    /* Plynulý scrolling na mobiloch */
+    -webkit-overflow-scrolling: touch; 
 }
 
 body {
     background: #0d0e0d;
     color: #eee;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     padding-left: 7vw;
     padding-right: 7vw;
     line-height: 1.6;
@@ -98,15 +96,20 @@ body {
     height: auto;
     opacity: 0.96;
     cursor: zoom-in;
+    /* Plynulý prechod na desktope */
     transition: opacity 0.4s ease, transform 0.4s ease;
+    /* Zabráni rozostreniu pri skalovaní */
+    backface-visibility: hidden; 
 }
 
-.gallery-item img:hover {
-    opacity: 1;
-    transform: scale(1.015);
+@media (hover: hover) and (pointer: fine) {
+    .gallery-item img:hover {
+        opacity: 1;
+        transform: scale(1.015);
+    }
 }
 
-/* Layout widths */
+/* Layout widths for desktop */
 .standard { width: 82%; max-width: 900px; }
 .featured { width: 88%; max-width: 1100px; }
 .vertical { width: 58%; max-width: 620px; }
@@ -120,7 +123,7 @@ body {
 }
 
 /* =========================================
-   CONTACT SHEET
+   CONTACT SHEET / ARCHIVE MASONRY
 ========================================= */
 
 .index-section {
@@ -161,14 +164,17 @@ body {
     cursor: zoom-in;
     opacity: 0.84;
     transition: opacity 0.4s ease, transform 0.4s ease;
+    backface-visibility: hidden;
 }
 
-.archive-item img:hover {
-    opacity: 1;
-    transform: scale(1.02);
+@media (hover: hover) and (pointer: fine) {
+    .archive-item img:hover {
+        opacity: 1;
+        transform: scale(1.02);
+    }
 }
 
-/* Asymmetry settings */
+/* Asymmetry settings for desktop */
 .archive-item:nth-child(3n+2) { margin-top: 40px; }
 .archive-item:nth-child(3n+3) { margin-top: 75px; }
 
@@ -220,6 +226,8 @@ body {
     cursor: zoom-out;
     opacity: 0;
     transition: opacity 0.25s ease;
+    /* Hardvérová akcelerácia pre plynulé otváranie */
+    will-change: opacity;
 }
 
 #lightbox.active {
@@ -248,6 +256,7 @@ body {
     opacity: 0;
     transform: translateY(12px);
     transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
 }
 
 .fade-element.visible {
@@ -255,7 +264,7 @@ body {
     transform: translateY(0);
 }
 
-/* Disable animations for users who prefer reduced motion */
+/* Pre používateľov, ktorí majú vo Windowse/iOS vypnuté animácie */
 @media (prefers-reduced-motion: reduce) {
     .fade-element {
         opacity: 1;
@@ -265,7 +274,7 @@ body {
 }
 
 /* =========================================
-   RESPONSIVENESS
+   RESPONSIVENESS & MOBILE OPTIMIZATIONS
 ========================================= */
 
 @media (max-width: 900px) {
@@ -286,12 +295,12 @@ body {
 
 @media (max-width: 600px) {
     body { 
-        padding-left: 20px; 
-        padding-right: 20px; 
+        padding-left: 16px; 
+        padding-right: 16px; 
     }
 
     .top-nav { 
-        gap: 14px; 
+        gap: 16px; 
         padding-top: 24px;
         padding-bottom: 24px;
         flex-wrap: wrap; 
@@ -302,24 +311,36 @@ body {
         padding-bottom: 10vh; 
     }
     
-    .hero h1 { font-size: 30px; }
+    .hero h1 { font-size: 32px; }
 
-    .gallery { gap: 10vh; }
+    .gallery { gap: 8vh; }
+    
+    /* Na mobile zrušíme obmedzenie šírok a fotky roztiahneme */
     .standard, .featured, .vertical { 
         width: 100% !important; 
         max-width: 100% !important; 
     }
 
+    .gallery-item img {
+        opacity: 1; /* Na mobile netreba polopriehľadnosť */
+    }
+
+    /* Optimalizácia Masonry gridu pre úzke displeje */
     .masonry-grid { 
-        column-count: 2; /* 2 columns works best for small mobile rendering */
+        column-count: 2; 
         column-gap: 10px;
         margin-top: 20px;
     }
 
     .archive-item {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
+    .archive-item img {
+        opacity: 1;
+    }
+
+    /* Resetovanie asymetrie z desktopu, aby grid nelietal */
     .archive-item:nth-child(3n+1),
     .archive-item:nth-child(3n+2),
     .archive-item:nth-child(3n+3) { 
@@ -327,5 +348,11 @@ body {
         margin-left: 0 !important;
         margin-right: 0 !important;
         margin-top: 0 !important; 
+    }
+
+    /* Zjednodušenie animácie fade-in pre mobilné GPU */
+    .fade-element {
+        transform: none !important; /* Vypne TranslateY, robí len čisto opacity */
+        transition: opacity 0.4s ease !important;
     }
 }
