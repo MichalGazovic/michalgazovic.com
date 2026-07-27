@@ -21,7 +21,7 @@ const galleryPhotos = [
     { src: "images/beech-fir-fog-tokaren.webp", alt: "Foggy forest fir beech autumn", layout: "standard" },
     { src: "images/vychod-slnka.webp", alt: "Sunrise in the mountain valley", layout: "standard" },
     { src: "images/stvrok-kostol-hory.webp", alt: "Church in Spissky Stvrtok with High Tatra mountains", layout: "vertical" },
-    { src: "images/meadows-with-hay-racks.webp", alt: "Meadows in Zdiar with hay racks", layout: "standard" },
+    { src: "russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake", layout: "standard" },
     { src: "images/mt-denali-with-tundra.webp", alt: "Mount Denali with tundra trees sunrise", layout: "standard" },
     { src: "images/vertical-landscape-water.webp", alt: "Mala studena valley in High Tatra", layout: "vertical" },
     { src: "images/morning-valley-from-mala-studena.webp", alt: "Morning valley from Mala stuena dolina", layout: "standard" },
