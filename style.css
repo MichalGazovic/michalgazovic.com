@@ -97,7 +97,8 @@ body {
     height: auto;
     max-height: 78vh;
     object-fit: contain;
-    opacity: 0.65; /* Základná znížená viditeľnosť */
+    aspect-ratio: 3 / 2; /* Reserves vertical space before lazy load */
+    opacity: 0.65;
     cursor: zoom-in;
     transition: opacity 0.5s ease, transform 0.4s ease;
     backface-visibility: hidden; 
@@ -129,6 +130,7 @@ body {
 .vertical img {
     width: auto;
     max-height: 72vh;
+    aspect-ratio: 2 / 3; /* Reserved ratio for portrait photos */
 }
 
 /* =========================================
@@ -244,7 +246,7 @@ body {
     opacity: 0;
     transition: opacity 0.25s ease;
     will-change: opacity;
-    touch-action: none; /* Vypne prirodzené skrolovanie prehliadača počas otvoreného lightboxu */
+    touch-action: none;
 }
 
 #lightbox.active {
