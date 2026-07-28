@@ -159,7 +159,23 @@ function getThumbSrc(fullSrc) {
         masonryGrid.appendChild(fragment);
     }
 
-    // 3. Lightbox Logic
+    // 3. Smooth Navigation Scroll Handler
+    document.querySelectorAll('.top-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // 4. Lightbox Logic
     const lightbox = document.getElementById("lightbox");
     const lightboxImage = document.getElementById("lightbox-image");
     let currentPhotosGroup = [];
@@ -231,7 +247,7 @@ function getThumbSrc(fullSrc) {
         }
     });
 
-    // SWIPE PRE MOBIL (Všetky 4 smery prechádzajú fotky)
+    // SWIPE PRE MOBIL
     let touchStartX = 0;
     let touchStartY = 0;
 
@@ -248,10 +264,9 @@ function getThumbSrc(fullSrc) {
             const diffX = touchEndX - touchStartX;
             const diffY = touchEndY - touchStartY;
 
-            const threshold = 35; // Hranica pre zistenie swipe gesta v px
+            const threshold = 35;
 
             if (Math.abs(diffX) > Math.abs(diffY)) {
-                // Horizontálny posun
                 if (Math.abs(diffX) > threshold) {
                     if (diffX < 0) {
                         currentIndex = (currentIndex + 1) % currentPhotosGroup.length;
@@ -261,7 +276,6 @@ function getThumbSrc(fullSrc) {
                     updateLightboxImage(currentIndex);
                 }
             } else {
-                // Vertikálny posun
                 if (Math.abs(diffY) > threshold) {
                     if (diffY < 0) {
                         currentIndex = (currentIndex + 1) % currentPhotosGroup.length;
@@ -274,9 +288,7 @@ function getThumbSrc(fullSrc) {
         }, { passive: true });
     }
 
-    // 4. Performance-optimized Intersection Observers
-    
-    // Observer pre fade-in pri scrollovaní
+    // 5. Performance-optimized Intersection Observers
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -288,7 +300,6 @@ function getThumbSrc(fullSrc) {
 
     document.querySelectorAll(".fade-element").forEach(el => fadeObserver.observe(el));
 
-    // Observer pre zosvetlenie fotky v strede obrazovky
     const opacityObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -298,7 +309,7 @@ function getThumbSrc(fullSrc) {
             }
         });
     }, { 
-        rootMargin: "-20% 0px -20% 0px", // Deteguje fotky približne v strede obrazovky
+        rootMargin: "-20% 0px -20% 0px",
         threshold: 0.15 
     });
 
