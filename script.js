@@ -21,7 +21,7 @@ const galleryPhotos = [
     { src: "images/beech-fir-fog-tokaren.webp", alt: "Foggy forest fir beech autumn", layout: "standard" },
     { src: "images/vychod-slnka.webp", alt: "Sunrise in the mountain valley", layout: "standard" },
     { src: "images/stvrok-kostol-hory.webp", alt: "Church in Spissky Stvrtok with High Tatra mountains", layout: "vertical" },
-    { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake", layout: "standard" },
+    { src: "images/meadows-with-hay-racks.webp", alt: "Meadows in Zdiar with hay racks", layout: "standard" },
     { src: "images/mt-denali-with-tundra.webp", alt: "Mount Denali with tundra trees sunrise", layout: "standard" },
     { src: "images/vertical-landscape-water.webp", alt: "Mala studena valley in High Tatra", layout: "vertical" },
     { src: "images/morning-valley-from-mala-studena.webp", alt: "Morning valley from Mala stuena dolina", layout: "standard" },
@@ -50,7 +50,7 @@ const archivePhotos = [
     { src: "images/luka-zdiar.webp", alt: "Green meadow after a thunderstorm" },
     { src: "images/snow-firewood.webp", alt: "Winter rustic firewood shed" },
     { src: "images/road-to-sunshine.webp", alt: "Road leading into fog" },
-    { src: "images/richardson-highway.webp", alt: "Richardson highway" },
+    { src: "images/Richardson-highway.webp", alt: "Richardswon highway" },
     { src: "images/siroke-sedlo-morning.webp", alt: "View at Zdiar and Zamagurie from Siroke sedlo" },
     { src: "images/rain-in-brooks-range.webp", alt: "Rain in Brooks Range" },
     { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake" },
@@ -99,7 +99,6 @@ const archivePhotos = [
     { src: "images/eldena-forest.webp", alt: "Eldena forest spring flooding" }
 ];
 
-// Helper funkcia pre odvodenie cesty k náhľadu
 function getThumbSrc(fullSrc) {
     const filename = fullSrc.split('/').pop();
     return `images/thumbs/${filename}`;
@@ -108,8 +107,6 @@ function getThumbSrc(fullSrc) {
 (function() {
     const gallery = document.querySelector("#gallery-section") || document.querySelector(".gallery");
     const masonryGrid = document.querySelector("#masonry-grid") || document.querySelector(".masonry-grid");
-
-    // Zistíme šírku obrazovky pre adaptívne načítanie
     const isMobile = window.innerWidth <= 768;
 
     // 1. Render Main Gallery
@@ -123,17 +120,15 @@ function getThumbSrc(fullSrc) {
 
             const img = document.createElement("img");
             img.alt = photo.alt;
-            img.dataset.fullsrc = photo.src; // Pôvodný súbor pre Lightbox
+            img.dataset.fullsrc = photo.src;
             img.decoding = "async";
 
-            // Správne poradie pre Lazy-Loading
             if (index < 1) {
-                img.loading = "eager"; // Len prvá fotka načítava okamžite
+                img.loading = "eager";
             } else {
-                img.loading = "lazy";  // Ostatné sa sťahujú až pri scrollnutí
+                img.loading = "lazy";
             }
 
-            // Rozhodnutie: Desktop = Plná fotka, Mobile = Thumb
             img.src = isMobile ? getThumbSrc(photo.src) : photo.src;
 
             wrapper.appendChild(img);
@@ -142,7 +137,7 @@ function getThumbSrc(fullSrc) {
         gallery.appendChild(fragment);
     }
 
-    // 2. Render Archive/Contact Sheet (Vždy Thumbs)
+    // 2. Render Archive/Contact Sheet
     if (masonryGrid) {
         masonryGrid.innerHTML = "";
         const fragment = document.createDocumentFragment();
@@ -156,8 +151,6 @@ function getThumbSrc(fullSrc) {
             img.dataset.fullsrc = photo.src; 
             img.decoding = "async";
             img.loading = "lazy";
-
-            // Archív používa výhradne male thumbs
             img.src = getThumbSrc(photo.src);
 
             wrapper.appendChild(img);
@@ -181,7 +174,6 @@ function getThumbSrc(fullSrc) {
                 currentPhotosGroup = images;
                 currentIndex = images.indexOf(e.target);
                 
-                // Vždy stiahne plnú kvalitu uloženú v data-fullsrc
                 const targetFullSrc = e.target.dataset.fullsrc || e.target.src;
                 lightboxImage.src = targetFullSrc;
                 lightbox.style.display = "flex";
@@ -202,7 +194,7 @@ function getThumbSrc(fullSrc) {
         lightbox.classList.remove("active");
         setTimeout(() => {
             lightbox.style.display = "none";
-            if (lightboxImage) lightboxImage.src = ""; // Vyčistenie RAM po zatvorení
+            if (lightboxImage) lightboxImage.src = "";
             document.body.style.overflow = "auto";
         }, 250);
     }
@@ -224,6 +216,7 @@ function getThumbSrc(fullSrc) {
         }
     }
 
+    // Klávesové skratky pre PC
     document.addEventListener("keydown", event => {
         if (lightbox && lightbox.style.display === "flex") {
             if (event.key === "Escape") closeLightbox();
@@ -238,18 +231,81 @@ function getThumbSrc(fullSrc) {
         }
     });
 
-    // 4. Performance-optimized Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
+    // SWIPE PRE MOBIL (Všetky 4 smery prechádzajú fotky)
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    if (lightbox) {
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].screenX;
+            const touchEndY = e.changedTouches[0].screenY;
+            
+            const diffX = touchEndX - touchStartX;
+            const diffY = touchEndY - touchStartY;
+
+            const threshold = 35; // Hranica pre zistenie swipe gesta v px
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Horizontálny posun
+                if (Math.abs(diffX) > threshold) {
+                    if (diffX < 0) {
+                        currentIndex = (currentIndex + 1) % currentPhotosGroup.length;
+                    } else {
+                        currentIndex = (currentIndex - 1 + currentPhotosGroup.length) % currentPhotosGroup.length;
+                    }
+                    updateLightboxImage(currentIndex);
+                }
+            } else {
+                // Vertikálny posun
+                if (Math.abs(diffY) > threshold) {
+                    if (diffY < 0) {
+                        currentIndex = (currentIndex + 1) % currentPhotosGroup.length;
+                    } else {
+                        currentIndex = (currentIndex - 1 + currentPhotosGroup.length) % currentPhotosGroup.length;
+                    }
+                    updateLightboxImage(currentIndex);
+                }
+            }
+        }, { passive: true });
+    }
+
+    // 4. Performance-optimized Intersection Observers
+    
+    // Observer pre fade-in pri scrollovaní
+    const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
+                fadeObserver.unobserve(entry.target);
+            }
+        });
+    }, { rootMargin: "200px 0px", threshold: 0.01 });
+
+    document.querySelectorAll(".fade-element").forEach(el => fadeObserver.observe(el));
+
+    // Observer pre zosvetlenie fotky v strede obrazovky
+    const opacityObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+            } else {
+                entry.target.classList.remove("in-view");
             }
         });
     }, { 
-        rootMargin: "200px 0px", // Načíta sa s malým predstihom pri skrolovaní
-        threshold: 0.01 
+        rootMargin: "-20% 0px -20% 0px", // Deteguje fotky približne v strede obrazovky
+        threshold: 0.15 
     });
 
-    document.querySelectorAll(".fade-element").forEach(el => observer.observe(el));
+    setTimeout(() => {
+        document.querySelectorAll(".gallery-item img, .archive-item img").forEach(img => {
+            opacityObserver.observe(img);
+        });
+    }, 100);
+
 })();
