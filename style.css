@@ -10,7 +10,6 @@
 
 html {
     scroll-behavior: smooth;
-    /* Plynulý scrolling na mobiloch */
     -webkit-overflow-scrolling: touch; 
 }
 
@@ -96,15 +95,18 @@ body {
     display: block;
     width: 100%;
     height: auto;
-    /* Constrain by viewport height so photos don't overflow on short screens */
     max-height: 78vh;
     object-fit: contain;
-    opacity: 0.96;
+    opacity: 0.65; /* Základná znížená viditeľnosť */
     cursor: zoom-in;
-    /* Plynulý prechod na desktope */
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    /* Zabráni rozostreniu pri skalovaní */
+    transition: opacity 0.5s ease, transform 0.4s ease;
     backface-visibility: hidden; 
+}
+
+/* Trieda pridávaná pomocou JS pri skrolovaní stredom obrazovky */
+.gallery-item img.in-view,
+.archive-item img.in-view {
+    opacity: 1 !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -125,8 +127,8 @@ body {
 }
 
 .vertical img {
-    width: auto; /* Allow width to shrink when constrained by height */
-    max-height: 72vh; /* Extra vertical clearance for portrait photos */
+    width: auto;
+    max-height: 72vh;
 }
 
 /* =========================================
@@ -177,7 +179,7 @@ body {
     display: block;
     border-radius: 2px;
     cursor: zoom-in;
-    opacity: 0.84;
+    opacity: 0.65;
     transition: opacity 0.4s ease, transform 0.4s ease;
     backface-visibility: hidden;
 }
@@ -241,8 +243,8 @@ body {
     cursor: zoom-out;
     opacity: 0;
     transition: opacity 0.25s ease;
-    /* Hardvérová akcelerácia pre plynulé otváranie */
     will-change: opacity;
+    touch-action: none; /* Vypne prirodzené skrolovanie prehliadača počas otvoreného lightboxu */
 }
 
 #lightbox.active {
@@ -279,7 +281,6 @@ body {
     transform: translateY(0);
 }
 
-/* Pre používateľov, ktorí majú vo Windowse/iOS vypnuté animácie */
 @media (prefers-reduced-motion: reduce) {
     .fade-element {
         opacity: 1;
@@ -292,7 +293,6 @@ body {
    RESPONSIVENESS & MOBILE OPTIMIZATIONS
 ========================================= */
 
-/* Adjustments for shorter laptop displays (e.g. 13"-15" laptops) */
 @media (min-width: 601px) and (max-height: 850px) {
     .gallery {
         gap: 14vh;
@@ -345,7 +345,6 @@ body {
 
     .gallery { gap: 8vh; }
     
-    /* Na mobile zrušíme obmedzenie šírok a fotky roztiahneme */
     .standard, .featured, .vertical { 
         width: 100% !important; 
         max-width: 100% !important; 
@@ -354,11 +353,9 @@ body {
     .gallery-item img,
     .vertical img {
         width: 100% !important;
-        max-height: none !important; /* Na mobile necháme výšku prirodzenú */
-        opacity: 1; /* Na mobile netreba polopriehľadnosť */
+        max-height: none !important;
     }
 
-    /* Optimalizácia Masonry gridu pre úzke displeje */
     .masonry-grid { 
         column-count: 2; 
         column-gap: 10px;
@@ -369,11 +366,6 @@ body {
         margin-bottom: 10px;
     }
 
-    .archive-item img {
-        opacity: 1;
-    }
-
-    /* Resetovanie asymetrie z desktopu, aby grid nelietal */
     .archive-item:nth-child(3n+1),
     .archive-item:nth-child(3n+2),
     .archive-item:nth-child(3n+3) { 
@@ -383,9 +375,8 @@ body {
         margin-top: 0 !important; 
     }
 
-    /* Zjednodušenie animácie fade-in pre mobilné GPU */
     .fade-element {
-        transform: none !important; /* Vypne TranslateY, robí len čisto opacity */
+        transform: none !important;
         transition: opacity 0.4s ease !important;
     }
 }
