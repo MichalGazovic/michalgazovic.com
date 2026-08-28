@@ -20,7 +20,7 @@ const galleryPhotos = [
     { src: "images/loghouse-tree-fog.webp", alt: "Log house with trees in foggy sunrise", layout: "vertical" },
     { src: "images/beech-fir-fog-tokaren.webp", alt: "Foggy forest fir beech autumn", layout: "standard" },
     { src: "images/vychod-slnka.webp", alt: "Sunrise in the mountain valley", layout: "standard" },
-    { src: "images/stvrok-kostol-hory.webp", alt: "Church in Spissky Stvrtok with High Tatra mountains", layout: "vertical" },
+    //{ src: "images/stvrok-kostol-hory.webp", alt: "Church in Spissky Stvrtok with High Tatra mountains", layout: "vertical" },
     { src: "images/russian-lake-fog-submerged-logs.webp", alt: "Foggy morning at Russian lake", layout: "standard" },
     { src: "images/mt-denali-with-tundra.webp", alt: "Mount Denali with tundra trees sunrise", layout: "standard" },
     { src: "images/vertical-landscape-water.webp", alt: "Mala studena valley in High Tatra", layout: "vertical" },
